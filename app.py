@@ -1,8 +1,3 @@
-"""
-Explainable Credit Risk Prediction - Streamlit app
-Loads credit_artifacts.pkl (exported from the Colab notebook), takes applicant details,
-returns a risk prediction and a SHAP waterfall explanation.
-"""
 import joblib
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,10 +6,6 @@ import shap
 import streamlit as st
 
 st.set_page_config(page_title="Explainable Credit Risk", page_icon="💳", layout="wide")
-
-# ----------------------------------------------------------------------------
-# Readable labels for the raw UCI German Credit codes
-# ----------------------------------------------------------------------------
 FIELD_NAMES = {
     "status": "Checking account status",
     "duration": "Loan duration (months)",
@@ -65,7 +56,7 @@ LABELS = {
     "foreign_worker": {"A201": "Yes", "A202": "No"},
 }
 
-# (min, max, default, step) for numeric inputs
+
 NUM_CONFIG = {
     "duration": (4, 72, 24, 1),
     "credit_amount": (250, 20000, 3000, 50),
@@ -79,9 +70,6 @@ NUM_CONFIG = {
 MODEL_ORDER = ["Logistic Regression", "Decision Tree", "Random Forest", "XGBoost"]
 
 
-# ----------------------------------------------------------------------------
-# Loading and helpers
-# ----------------------------------------------------------------------------
 @st.cache_resource
 def load_artifacts():
     return joblib.load("credit_artifacts.pkl")
@@ -121,9 +109,7 @@ def explain_row(explainer, x_row: np.ndarray, names):
     return shap.Explanation(values=sv[0], base_values=float(base), data=x_row[0], feature_names=names)
 
 
-# ----------------------------------------------------------------------------
-# UI
-# ----------------------------------------------------------------------------
+
 art = load_artifacts()
 COLS = art["columns"]
 
