@@ -1,0 +1,10 @@
+# TEMPLATE - the Colab notebook generates deploy/requirements.txt with the EXACT versions
+# used to train the models. Replace this file with that one to avoid pickle version errors.
+streamlit
+shap
+scikit-learn
+xgboost
+joblib
+numpy
+pandas
+matplotlib
